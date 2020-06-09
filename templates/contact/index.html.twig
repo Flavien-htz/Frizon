@@ -1,0 +1,84 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin=""/>
+
+	<style>
+		#maCarte {
+
+			height: 400px;
+			width: 600px;
+		}
+	</style>
+
+
+	<article
+		class="row">
+
+		{# --------------Partie de gauche ---------------------#}
+		<section class="col-6">
+			{% for message in app.flashes('Envoyé') %}
+				<div class="alert alert-success">
+					{{message}}
+				</div>
+
+			{% endfor %}
+
+			<article class="row">
+				<section class="col-2"></section>
+				<section class="col-10">
+					<h1 class="text-secondary">
+						Fiche contact
+					</h1>
+				</section>
+			</article>
+
+			<article class="row mt-5">
+				<section class="col-2"></section>
+				<section class="col-10">
+					<h3 class="text-info">
+						Nous contacter
+					</h3>
+				</section>
+			</article>
+
+			<article class="row">
+				<section class="col-2"></section>
+				<section class="col-10 mt-4">
+					{{ form(contactForm) }}
+					</section>
+				</article>
+			</section>
+
+
+			{# --------------Partie de droite ---------------------#}
+
+
+			<section class="col-6 mt-5">
+				<div id="maCarte"></div>
+				<script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js" integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og==" crossorigin=""></script>
+				<script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
+				<script>
+
+					// On initialise la carte
+						var carte = L.map('maCarte').setView([
+						48.285517, 6.363331
+						], 12);
+
+						// On charge les "tuiles"
+						L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', { // Il est toujours bien de laisser le lien vers la source des données
+						attribution: 'données © <a href="//osm.org/copyright">OpenStreetMap</a>/ODbL - rendu <a href="//openstreetmap.fr">OSM France</a>',
+						minZoom: 1,
+						maxZoom: 20
+						}).addTo(carte);
+
+						// On crée le marqueur et on lui attribue une popup
+						var marqueur = L.marker([48.285517, 6.363331]).addTo(carte);
+						marqueur.bindPopup("<b>Mairie</b><br>75 Place de la Mairie, 88440 Frizon");
+				</script>
+
+			</section>
+		</article>
+
+
+	{% endblock %}

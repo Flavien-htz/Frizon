@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>
+			{% block title %}Village de Frizon
+			{% endblock %}
+		</title>
+		<link rel="stylesheet" href="{{ asset ('css/bootstrap/bootstrap/css/bootstrap.css')}}">
+		<link rel="shortcut icon" type="image/x-icon" href="{{ asset ('images/favicon.ico') }}"/>
+
+
+	</head>
+	<body>
+
+
+		{# <style>
+																											body {
+																												padding-top: 10px;
+																											}
+																								
+																											[class*="col-"],
+																											footer {
+																												background-color: lightgreen;
+																												border: 2px solid black;
+																												border-radius: 6px;
+																												line-height: 40px;
+																												text-align: center;
+																											}
+																										</style> #}
+
+		<article style="background-color:#f5f5f0">
+
+			<section class="row">
+				<article class="col-3"></article>
+				<article class="col-6 ml-3">
+					<img class="img-fluid" src="images/bg.png" alt="">
+				</article>
+			</section>
+
+			<section class="row">
+				<article class="col-12">
+					<h1 class="text-center">Village de Frizon</h1>
+				</article>
+			</section>
+
+
+			<section class="row mb-5">
+				<article class="col-3"></article>
+				<article class="ml-5">
+					<nav class="navbar navbar-expand-lg navbar-light bg-white rounded">
+
+						<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+							<span class="navbar-toggler-icon"></span>
+						</button>
+
+						<div class="collapse navbar-collapse" id="navbarSupportedContent">
+							<ul class="navbar-nav mr-auto">
+								<li class="nav-item {% if current_menu is defined and current_menu == 'accueil' %} active {% endif %}">
+									<a class="nav-link" href="{{ path ('index') }}">
+										<img src="{{ asset ('images/blason.png') }}" height="30" alt="blason">
+										Accueil
+									</a>
+								</li>
+								<li class="nav-item {% if current_menu is defined and current_menu == 'event' %} active {% endif %}">
+									<a class="nav-link" href="{{ path ('event') }}">Évènements</a>
+								</li>
+								<li class="nav-item {% if current_menu is defined and current_menu == 'musee' %} active {% endif %}">
+									<a class="nav-link" href="{{ path ('musee') }}">Musée</a>
+								</li>
+
+								<li class="nav-item dropdown {% if current_menu is defined and current_menu == 'commerce' %} active {% endif %}">
+									<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+										Commerce
+									</a>
+									<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+										<a class="dropdown-item" href="{{ path ('boulangerie') }}">Boulangerie/Pizzeria</a>
+										<a class="dropdown-item" href=" {{ path ('restaurant') }} ">Restaurant</a>
+
+									</div>
+								</li>
+								<li class="nav-item {% if current_menu is defined and current_menu == 'mairie' %} active {% endif %}">
+									<a class="nav-link" href="{{ path ('mairie') }}">Mairie</a>
+								</li>
+								<li class="nav-item {% if current_menu is defined and current_menu == 'contact' %} active {% endif %}">
+									<a class="nav-link" href="{{ path ('contact') }}">Contact</a>
+								</li>
+								<li class="nav-item {% if current_menu is defined and current_menu == 'annonces' %} active {% endif %}">
+									<a class="nav-link" href="{{ path ('annonces') }}">Annonces</a>
+								</li>
+								<li class="nav-item active">
+									<a class="nav-link" href="{{ path ('app_login') }}">Connexion</a>
+								</li>
+							</div>
+						</nav>
+					</article>
+				</section>
+			</article>
+			{% block body %}
+
+				<div class="alert alert-danger">
+					ERREUR DE PAGE
+				</div>
+
+			{% endblock %}
+		</body>
+	</body>
+</html>
+
+
+{% block javascripts %}
+	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+	<script src="{{ asset ('css/bootstrap/bootstrap/js/app.js')}}"></script>
+{% endblock %}

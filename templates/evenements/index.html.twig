@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	Administration
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+	<h1>Administration</h1>
+
+
+
+		{% for message in app.flashes('success') %}
+			<div class="alert alert-success">
+				{{message}}
+			</div>
+
+		{% endfor %}
+		{% if app.user %}
+			<div class="mb-3">
+				Vous êtes connecté en tant que
+				{{ app.user.username }},
+				<a href="{{ path('app_logout') }}">se deconnecter</a>
+			</div>
+		{% endif %}
+    </div>
+        <a class="btn btn-outline-success" href="{{ path('evenements_new') }}">Ajouter un évènement</a>
+
+		<table class="table mt-3">
+			<thead>
+				<tr>
+					<th>Nom</th>
+					<th>Lieu</th>
+					<th>Date_debut</th>
+					<th>Date_fin</th>
+                    <th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for evenement in evenements %}
+					<tr>
+						<td>{{ evenement.nom }}</td>
+						<td>{{ evenement.lieu }}</td>
+						<td>{{ evenement.dateDebut }}</td>
+						<td>{{ evenement.dateFin }}</td>
+						<td>
+							<a class="btn btn-success" href="{{ path('evenements_show', {'id': evenement.id}) }}">Afficher</a>
+							<a class="btn btn-danger" href="{{ path('evenements_edit', {'id': evenement.id}) }}">Modifier</a>
+						</td>
+					</tr>
+				{% else %}
+					<tr>
+						<td colspan="6">Pas d'évènement</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+
+
+		
+	{% endblock %}

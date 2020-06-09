@@ -1,0 +1,36 @@
+{% extends "base.html.twig" %}
+{% block body %}
+
+	<article class="row">
+		<section class="col-12 mb-5">
+			<article class="row">
+				<section class="col-2"></section>
+				<section class="col-6">
+					<h1 class="text-secondary">
+						Évènement à venir dans le village
+					</h1>
+				</section>
+			</article>
+		</section>
+	</article>
+
+
+	<article class="row">
+		{% for evenement in events %}
+			<section class="col-1"></section>
+			<section class="col-3 mb-4">
+				<div class="card">
+					<div class="card-body">
+						<h4 class="card-title">{{ evenement.nom }}</h4>
+						<p class="card-text"> <strong>Lieu :</strong>
+							{{ evenement.lieu }}</p>
+						<p class="card-text"><strong>Date de début :</strong>
+							{{ evenement.datedebut }}</p>
+						<p class="card-text"><strong>Date de fin :</strong>
+							{{ evenement.datefin }}</p>
+					</div>
+				</div>
+			</section>
+		{% endfor %}
+	</article>
+{% endblock %}

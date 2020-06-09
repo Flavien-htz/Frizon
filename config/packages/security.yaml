@@ -1,0 +1,42 @@
+security:
+  encoders:
+    Symfony\Component\Security\Core\User\User: plaintext
+    App\Entity\Users:
+        algorithm: auto
+
+
+  role_hierarchy:
+    ROLE_ADMIN:       ROLE_USER
+    ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+
+  providers:
+    # used to reload user from session & other features (e.g. switch_user)
+    app_user_provider:
+        entity:
+            class: App\Entity\Users
+            property: username
+
+  firewalls:
+    dev:
+      pattern: ^/(_(profiler|wdt)|css|images|js)/
+      security: false
+    main:
+      pattern:   ^/
+      anonymous: true
+      form_login:
+        login_path: login
+        check_path: login_check
+      logout:
+        path:       app_logout
+        # target:     login
+      guard:
+          authenticators:
+              - App\Security\UsersAuthenticator
+      
+
+  access_control:
+    - { path: ^/evenements, roles: ROLE_ADMIN }
+    - { path: ^/evenements_new, roles: ROLE_ADMIN }
+    - { path: ^/evenements_show, roles: ROLE_ADMIN }
+    - { path: ^/evenements_edit, roles: ROLE_ADMIN }
+    - { path: ^/evenements_delete, roles: ROLE_ADMIN }

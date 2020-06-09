@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Annonces index
+{% endblock %}
+
+{% block body %}
+	<h1>Annonces index</h1>
+
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Type</th>
+				<th>Description</th>
+				<th>NomPersonne</th>
+				<th>CreatedAt</th>
+				<th>Prix</th>
+				<th>Telephone</th>
+				<th>Image</th>
+				<th>actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for annonce in annonces %}
+				<tr>
+					<td>{{ annonce.type }}</td>
+					<td>{{ annonce.description }}</td>
+					<td>{{ annonce.nomPersonne }}</td>
+					<td>{{ annonce.createdAt ? annonce.createdAt|date('Y-m-d') : '' }}</td>
+					<td>{{ annonce.prix }}</td>
+					<td>{{ annonce.telephone }}</td>
+                    {% if annonces.filename %}
+                    
+                    <img src="/images/annonces/{{ annonces.filename }}" alt="">
+                    
+                    {% endif %}
+                    
+
+					<td>
+						<a href="{{ path('annonces_show', {'id': annonce.id}) }}">show</a>
+						<a href="{{ path('annonces_edit', {'id': annonce.id}) }}">edit</a>
+					</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="8">no records found</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+	<a href="{{ path('annonces_new') }}">Create new</a>
+{% endblock %}
