@@ -89,7 +89,9 @@ class HomeController extends AbstractController
             return $this->redirectToRoute('contact');
         }
         return $this->render('contact/index.html.twig',[
-            'contactForm' => $form->createView()]);
+            'contactForm' => $form->createView(),
+            "current_menu" => "contact"
+        ]);
     }
 
     /**
@@ -137,7 +139,7 @@ class HomeController extends AbstractController
      */
     public function annonces()
     {
-        return $this->render('annonces/index.html.twig', [
+        return $this->render('annonces.html.twig', [
             "current_menu" => "annonces"
         ]);
     }

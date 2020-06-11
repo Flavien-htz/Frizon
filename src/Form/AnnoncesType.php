@@ -18,8 +18,8 @@ class AnnoncesType extends AbstractType
             ->add('type')
             ->add('description')
             ->add('nomPersonne')
-            ->add('createdAt')
-            ->add('prix')
+            // ->add('createdAt')
+            // ->add('prix')
             ->add('telephone')
             ->add('imageFile', FileType::class,[
                 'required' => false

@@ -1,5 +1,25 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    {{ form_rest(form)}}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+<article class="row">
+	<section class="col-4">
+
+				<label for="">Type d'annonce</label>
+				{{ form_widget(form.type) }}
+
+				<label for="">Description</label>
+				{{ form_widget(form.description) }}
+
+				<label for="">Nom prenom</label>
+				{{ form_widget(form.nomPersonne) }}
+
+				<label for="">Téléphone</label>
+				{{ form_widget(form.telephone) }}
+
+				<label for="">Image</label>
+				{{ form_widget(form.imageFile) }}
+
+			<button class="btn btn-success mt-3">{{ button_label|default('Engistrer') }}</button>
+
+	</section>
+</article>
+
 {{ form_end(form) }}

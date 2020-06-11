@@ -59,7 +59,9 @@ class Annonces
 
     /**
      * @Vich\UploadableField(mapping="annonces_images", fileNameProperty="filename")
-     * 
+     * @Assert\Image(
+     * mimeTypes = "image/jpeg"
+     * )
      * @var File|null
      */
     private $imageFile;

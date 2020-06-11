@@ -1,5 +1,5 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn btn-success">{{ button_label|default('Enregistrer') }}</button>
-    <a class="btn btn-info" href="{{ path('evenements_index') }}">Retour</a>
+{{ form_widget(form) }}
+<button class="btn btn-success">{{ button_label|default('Enregistrer') }}</button>
+<a class="btn btn-info" href="{{ path('evenements_index') }}">Retour</a>
 {{ form_end(form) }}

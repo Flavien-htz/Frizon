@@ -1,52 +1,57 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Annonces index
+{% block title %}Petites annonces
 {% endblock %}
 
 {% block body %}
-	<h1>Annonces index</h1>
+	<article class="row">
+		<section class="col-12 mb-3">
+			<article class="row">
+				<section class="col-2"></section>
+				<section class="col-6">
+					<h1 class="text-secondary">
+						Annonces
 
-	<table class="table">
-		<thead>
-			<tr>
-				<th>Type</th>
-				<th>Description</th>
-				<th>NomPersonne</th>
-				<th>CreatedAt</th>
-				<th>Prix</th>
-				<th>Telephone</th>
-				<th>Image</th>
-				<th>actions</th>
-			</tr>
-		</thead>
-		<tbody>
-			{% for annonce in annonces %}
-				<tr>
-					<td>{{ annonce.type }}</td>
-					<td>{{ annonce.description }}</td>
-					<td>{{ annonce.nomPersonne }}</td>
-					<td>{{ annonce.createdAt ? annonce.createdAt|date('Y-m-d') : '' }}</td>
-					<td>{{ annonce.prix }}</td>
-					<td>{{ annonce.telephone }}</td>
-                    {% if annonces.filename %}
-                    
-                    <img src="/images/annonces/{{ annonces.filename }}" alt="">
-                    
-                    {% endif %}
-                    
+					</h1>
+				</section>
+			</article>
+		</section>
+	</article>
 
-					<td>
-						<a href="{{ path('annonces_show', {'id': annonce.id}) }}">show</a>
-						<a href="{{ path('annonces_edit', {'id': annonce.id}) }}">edit</a>
-					</td>
-				</tr>
-			{% else %}
-				<tr>
-					<td colspan="8">no records found</td>
-				</tr>
-			{% endfor %}
-		</tbody>
-	</table>
+	<a class="btn btn-outline-success" href="{{ path('annonces_new') }}">Nouvelle annonce</a>
 
-	<a href="{{ path('annonces_new') }}">Create new</a>
+
+	<article class="row mt-3 ml-3">
+
+
+		{% for annonce in annonces %}
+
+			<section class="col-4">
+
+				<div class="card" style="width: 18rem;">
+
+					{% if annonce.filename %}
+						<img class="card-img-top" src="/images/annonces/{{ annonce.filename }}" alt="card-img-top" style="width: 100%; height: auto;">
+					{% endif %}
+
+					<div class="card-body">
+						<h5 class="card-title">{{ annonce.type }}</h5>
+						<p class="card-text">{{ annonce.description }}</p>
+					</div>
+					<ul class="list-group list-group-flush">
+						<li class="list-group-item">{{ annonce.nomPersonne }}</li>
+						<li class="list-group-item">{{ annonce.createdAt ? annonce.createdAt|date('Y-m-d') }}</li>
+						<li class="list-group-item">{{ annonce.telephone }}</li>
+					</ul>
+					<div class="card-body">
+						<a class="btn btn-primary" href="{{ path('annonces_edit', {'id': annonce.id}) }}">Modifier</a>
+					</div>
+				</div>
+			</section>
+
+		{% endfor %}
+
+	</article>
+
+
 {% endblock %}

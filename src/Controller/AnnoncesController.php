@@ -5,6 +5,8 @@ namespace App\Controller;
 use App\Entity\Annonces;
 use App\Form\AnnoncesType;
 use App\Repository\AnnoncesRepository;
+use App\Repository\EvenementsRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,6 +17,8 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class AnnoncesController extends AbstractController
 {
+
+
     /**
      * @Route("/", name="annonces_index", methods={"GET"})
      */
@@ -22,6 +26,7 @@ class AnnoncesController extends AbstractController
     {
         return $this->render('annonces/index.html.twig', [
             'annonces' => $annoncesRepository->findAll(),
+            "current_menu" => "annonces"
         ]);
     }
 
@@ -31,6 +36,7 @@ class AnnoncesController extends AbstractController
     public function new(Request $request): Response
     {
         $annonce = new Annonces();
+        $annonce->setCreatedAt(new \DateTime('now'));
         $form = $this->createForm(AnnoncesType::class, $annonce);
         $form->handleRequest($request);
 
@@ -45,6 +51,7 @@ class AnnoncesController extends AbstractController
         return $this->render('annonces/new.html.twig', [
             'annonce' => $annonce,
             'form' => $form->createView(),
+            "current_menu" => "annonces"
         ]);
     }
 
@@ -55,6 +62,7 @@ class AnnoncesController extends AbstractController
     {
         return $this->render('annonces/show.html.twig', [
             'annonce' => $annonce,
+            "current_menu" => "annonces"
         ]);
     }
 
@@ -75,6 +83,7 @@ class AnnoncesController extends AbstractController
         return $this->render('annonces/edit.html.twig', [
             'annonce' => $annonce,
             'form' => $form->createView(),
+            "current_menu" => "annonces"
         ]);
     }
 
