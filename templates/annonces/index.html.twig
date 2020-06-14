@@ -26,7 +26,7 @@
 
 		{% for annonce in annonces %}
 
-			<section class="col-4">
+			<section class="col-4 mt-5">
 
 				<div class="card" style="width: 18rem;">
 
@@ -39,9 +39,9 @@
 						<p class="card-text">{{ annonce.description }}</p>
 					</div>
 					<ul class="list-group list-group-flush">
-						<li class="list-group-item">{{ annonce.nomPersonne }}</li>
-						<li class="list-group-item">{{ annonce.createdAt ? annonce.createdAt|date('Y-m-d') }}</li>
-						<li class="list-group-item">{{ annonce.telephone }}</li>
+						<li class="list-group-item">Nom : {{ annonce.nomPersonne }}</li>
+						<li class="list-group-item">Date : {{ annonce.createdAt ? annonce.createdAt|date('Y-m-d') }}</li>
+						<li class="list-group-item">Téléphone : {{ annonce.telephone }}</li>
 					</ul>
 					<div class="card-body">
 						<a class="btn btn-primary" href="{{ path('annonces_edit', {'id': annonce.id}) }}">Modifier</a>
