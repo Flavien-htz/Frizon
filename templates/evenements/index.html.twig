@@ -6,8 +6,7 @@
 
 {% block body %}
 	<div class="container">
-	<h1>Administration</h1>
-
+		<h1>Administration</h1>
 
 
 		{% for message in app.flashes('success') %}
@@ -23,39 +22,39 @@
 				<a href="{{ path('app_logout') }}">se deconnecter</a>
 			</div>
 		{% endif %}
-    </div>
-        <a class="btn btn-outline-success" href="{{ path('evenements_new') }}">Ajouter un évènement</a>
+	</div>
+	<a class="btn btn-outline-success" href="{{ path('evenements_new') }}">Ajouter un évènement</a>
 
-		<table class="table mt-3">
-			<thead>
+	<table class="table mt-3">
+		<thead>
+			<tr>
+				<th>Nom</th>
+				<th>Lieu</th>
+				<th>Date_debut</th>
+				<th>Date_fin</th>
+				<th>Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for evenement in evenements %}
 				<tr>
-					<th>Nom</th>
-					<th>Lieu</th>
-					<th>Date_debut</th>
-					<th>Date_fin</th>
-                    <th>Actions</th>
+					<td>{{ evenement.nom }}</td>
+					<td>{{ evenement.lieu }}</td>
+					<td>{{ evenement.dateDebut }}</td>
+					<td>{{ evenement.dateFin }}</td>
+					<td>
+						<a class="btn btn-success" href="{{ path('evenements_show', {'id': evenement.id}) }}">Afficher</a>
+						<a class="btn btn-danger" href="{{ path('evenements_edit', {'id': evenement.id}) }}">Modifier</a>
+					</td>
 				</tr>
-			</thead>
-			<tbody>
-				{% for evenement in evenements %}
-					<tr>
-						<td>{{ evenement.nom }}</td>
-						<td>{{ evenement.lieu }}</td>
-						<td>{{ evenement.dateDebut }}</td>
-						<td>{{ evenement.dateFin }}</td>
-						<td>
-							<a class="btn btn-success" href="{{ path('evenements_show', {'id': evenement.id}) }}">Afficher</a>
-							<a class="btn btn-danger" href="{{ path('evenements_edit', {'id': evenement.id}) }}">Modifier</a>
-						</td>
-					</tr>
-				{% else %}
-					<tr>
-						<td colspan="6">Pas d'évènement</td>
-					</tr>
-				{% endfor %}
-			</tbody>
-		</table>
+			{% endfor %}
+		</tbody>
+	</table>
+
+	<section class="col-1 mr-5"></section>
+	<section class="col-6 ml-5 mt-5">
+		<h1>Aucun évènement enregistré</h1>
+	</section>
 
 
-		
-	{% endblock %}
+{% endblock %}
