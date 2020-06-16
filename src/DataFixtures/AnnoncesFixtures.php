@@ -21,7 +21,7 @@ class AnnoncesFixtures extends Fixture
             $annonces->setType($faker->word)
                 ->setDescription($faker->text(144))
                 ->setNomPersonne($faker->name())
-                ->setCreatedAt(new \DateTime('now'))
+                ->setCreatedAt(new \DateTime())
                 ->setTelephone($faker->mobileNumber());
 
 

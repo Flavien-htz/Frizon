@@ -36,7 +36,7 @@ class AnnoncesController extends AbstractController
     public function new(Request $request): Response
     {
         $annonce = new Annonces();
-        $annonce->setCreatedAt(new \DateTime('now'));
+        $annonce->setCreatedAt(new \DateTime());
         $form = $this->createForm(AnnoncesType::class, $annonce);
         $form->handleRequest($request);
 
