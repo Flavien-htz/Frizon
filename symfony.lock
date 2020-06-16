@@ -133,7 +133,11 @@
             "branch": "master",
             "version": "1.8",
             "ref": "1d42bc3f713130582e6e0c475c49bc327ab0a2a2"
-        }
+        },
+        "files": [
+            "./config/packages/liip_imagine.yaml",
+            "./config/routes/liip_imagine.yaml"
+        ]
     },
     "monolog/monolog": {
         "version": "1.25.3"
@@ -484,7 +488,7 @@
         ]
     },
     "symfony/templating": {
-        "version": "v4.4.9"
+        "version": "v4.4.10"
     },
     "symfony/test-pack": {
         "version": "v1.0.6"
