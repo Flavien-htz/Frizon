@@ -39,8 +39,8 @@
 
 				<div class="card" style="width: 18rem;">
 
-					{% if annonce.filename %}
-						<img class="card-img-top" src="/images/annonces/{{ annonce.filename }}" alt="card-img-top" style="width: 100%; height: auto;">
+					{% if annonce.picture %}
+						<img class="card-img-top" src="{{ vich_uploader_asset (annonce.picture, 'imageFile') | imagine_filter ('thumb') }}" alt="">
 					{% endif %}
 
 					<div class="card-body">
@@ -57,17 +57,20 @@
 					</ul>
 					<div class="card-body">
 						<a class="btn btn-primary" href="{{ path('annonces_edit', {'id': annonce.id}) }}">Modifier</a>
+						<a class="btn btn-success" href="{{ path('annonces_show', {'id': annonce.id}) }}">Afficher les détails</a>
 					</div>
 				</div>
 			</section>
 
+		{% else %}
+
+			<section class="col-1 mr-5"></section>
+			<section class="col-6 ml-5 mt-5">
+				<h1>Aucune annonce enregistrée</h1>
+			</section>
+
+
 		{% endfor %}
-
-		<section class="col-1 mr-5"></section>
-		<section class="col-6 ml-5 mt-5">
-			<h1>Aucune annonce enregistrée</h1>
-		</section>
-
 	</article>
 
 

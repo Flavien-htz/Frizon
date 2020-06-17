@@ -2,22 +2,25 @@
 <article class="row">
 	<section class="col-4">
 
-				<label for="">Type d'annonce</label>
-				{{ form_widget(form.type) }}
+		<label for="">Type d'annonce</label>
+		{{ form_widget(form.type) }}
 
-				<label for="">Description</label>
-				{{ form_widget(form.description) }}
+		<label for="">Description</label>
+		{{ form_widget(form.description) }}
 
-				<label for="">Nom prenom</label>
-				{{ form_widget(form.nomPersonne) }}
+		<label for="">Nom prenom</label>
+		{{ form_widget(form.nomPersonne) }}
 
-				<label for="">Téléphone</label>
-				{{ form_widget(form.telephone) }}
+		<label for="">Téléphone</label>
+		{{ form_widget(form.telephone) }}
 
-				<label for="">Image</label>
-				{{ form_widget(form.imageFile) }}
+		<label for="">Image</label>
+		{{ form_widget(form.pictureFiles) }}
 
-			<button class="btn btn-success mt-3">{{ button_label|default('Engistrer') }}</button>
+
+
+
+		<button class="btn btn-success mt-3">{{ button_label|default('Engistrer') }}</button>
 
 	</section>
 </article>

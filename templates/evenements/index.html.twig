@@ -47,14 +47,17 @@
 						<a class="btn btn-danger" href="{{ path('evenements_edit', {'id': evenement.id}) }}">Modifier</a>
 					</td>
 				</tr>
+
+			{% else %}
+				<section class="col-1 mr-5"></section>
+				<section class="col-6 ml-5 mt-5">
+					<h1>Aucun évènement enregistré</h1>
+				</section>
+
+
 			{% endfor %}
 		</tbody>
 	</table>
-
-	<section class="col-1 mr-5"></section>
-	<section class="col-6 ml-5 mt-5">
-		<h1>Aucun évènement enregistré</h1>
-	</section>
 
 
 {% endblock %}

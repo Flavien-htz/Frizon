@@ -34,13 +34,16 @@
 					</div>
 				</div>
 			</section>
+
+		{% else %}
+			<section class="col-1 mr-5"></section>
+			<section class="col-6 ml-5 mt-5">
+				<h1>Aucun évènement enregistré</h1>
+			</section>
+
+
 		{% endfor %}
 	</article>
-
-	<section class="col-1 mr-5"></section>
-	<section class="col-6 ml-5 mt-5">
-		<h1>Aucun évènement enregistré</h1>
-	</section>
 
 
 {% endblock %}

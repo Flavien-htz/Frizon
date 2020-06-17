@@ -2,13 +2,13 @@
 
 namespace App\Entity;
 
-use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\AnnoncesRepository")
- * @Vich\Uploadable()
  */
 class Annonces
 {
@@ -50,21 +50,23 @@ class Annonces
      */
     private $telephone;
 
+    /**
+     * @Assert\All({
+     *   @Assert\Image(mimeTypes="image/jpeg")
+     * })
+     */
+    private $pictureFiles;
+
 
     /**
-     * @var string|null
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\Picture", mappedBy="annonces", orphanRemoval=true, cascade={"persist", "remove"})
      */
-    private $filename;
+    private $pictures;
 
-    /**
-     * @Vich\UploadableField(mapping="annonces_images", fileNameProperty="filename")
-     * @Assert\Image(
-     * mimeTypes = "image/jpeg"
-     * )
-     * @var File|null
-     */
-    private $imageFile;
+    public function __construct()
+    {
+        $this->pictures = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -143,50 +145,72 @@ class Annonces
         return $this;
     }
 
-    /**
-     * Get the value of imageFile
-     *
-     * @return  File|null
-     */
-    public function getImageFile()
-    {
-        return $this->imageFile;
-    }
 
     /**
-     * Set the value of imageFile
-     *
-     * @param  File|null  $imageFile
-     *
-     * @return  self
+     * @return Collection|Picture[]
      */
-    public function setImageFile($imageFile)
+    public function getPictures(): Collection
     {
-        $this->imageFile = $imageFile;
+        return $this->pictures;
+    }
+
+
+    public function getPicture(): ?Picture
+    {
+        if ($this->pictures->isEmpty()) {
+            return null;
+        }
+        return $this->pictures->first();
+    }
+
+
+
+
+
+    public function addPicture(Picture $picture): self
+    {
+        if (!$this->pictures->contains($picture)) {
+            $this->pictures[] = $picture;
+            $picture->setAnnonces($this);
+        }
+
+        return $this;
+    }
+
+    public function removePicture(Picture $picture): self
+    {
+        if ($this->pictures->contains($picture)) {
+            $this->pictures->removeElement($picture);
+            // set the owning side to null (unless already changed)
+            if ($picture->getAnnonces() === $this) {
+                $picture->setAnnonces(null);
+            }
+        }
 
         return $this;
     }
 
     /**
-     * Get the value of filename
-     *
-     * @return  string|null
+     * Get })
      */
-    public function getFilename()
+    public function getPictureFiles()
     {
-        return $this->filename;
+        return $this->pictureFiles;
     }
 
     /**
-     * Set the value of filename
-     *
-     * @param  string|null  $filename
+     * Set })
      *
      * @return  self
      */
-    public function setFilename($filename)
+    public function setPictureFiles($pictureFiles)
     {
-        $this->filename = $filename;
+        foreach ($pictureFiles as $pictureFile) {
+            $picture = new Picture();
+            $picture->setImageFile($pictureFile);
+            $this->addPicture($picture);
+        }
+        $this->pictureFiles = $pictureFiles;
 
         return $this;
     }

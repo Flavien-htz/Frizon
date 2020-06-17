@@ -3,8 +3,6 @@
 namespace App\Form;
 
 use App\Entity\Annonces;
-use App\Entity\Images;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -21,8 +19,9 @@ class AnnoncesType extends AbstractType
             // ->add('createdAt')
             // ->add('prix')
             ->add('telephone')
-            ->add('imageFile', FileType::class,[
-                'required' => false
+            ->add('pictureFiles', FileType::class,[
+                'required' => false,
+                'multiple' => true
             ])
         ;
     }
