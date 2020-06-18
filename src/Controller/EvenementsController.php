@@ -50,12 +50,15 @@ class EvenementsController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="evenements_show", methods={"GET"})
+     * @Route("/{id}/show", name="evenements_show", methods={"GET"})
      */
     public function show(Evenements $evenement): Response
     {
+        $form = $this->createForm(EvenementsType::class, $evenement);
+        
         return $this->render('evenements/show.html.twig', [
             'evenement' => $evenement,
+            'form' => $form->createView()
         ]);
     }
 

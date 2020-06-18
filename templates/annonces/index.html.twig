@@ -38,10 +38,33 @@
 			<section class="col-4 mt-5">
 
 				<div class="card" style="width: 18rem;">
+					<div class="row-flex mb-2">
+						{% if annonce.picture %}
+							<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+								<div class="carousel-inner">
+									{% for picture in annonce.pictures %}
+										<div class="carousel-item {% if loop.first %} active {% endif %} ">
+											{% if picture.filename | slice(0,4) == 'lorem' %}
+												<img class=" d-block w-100" src="{{ picture.filename }}">
+											{% else %}
+												<img src="{{ vich_uploader_asset(picture, 'imageFile') }}" alt="">
+											{% endif %}
+										</div>
 
-					{% if annonce.picture %}
-						<img class="card-img-top" src="{{ vich_uploader_asset (annonce.picture, 'imageFile') | imagine_filter ('thumb') }}" alt="">
-					{% endif %}
+									{% endfor %}
+								</div>
+							</div>
+						{% endif %}
+						<a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+							<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+							<span class="sr-only">Previous</span>
+						</a>
+						<a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+							<span class="carousel-control-next-icon" aria-hidden="true"></span>
+							<span class="sr-only">Next</span>
+						</a>
+					</div>
+
 
 					<div class="card-body">
 						<h5 class="card-title">{{ annonce.type }}</h5>
