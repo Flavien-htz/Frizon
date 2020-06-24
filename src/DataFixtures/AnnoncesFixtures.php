@@ -31,10 +31,10 @@ class AnnoncesFixtures extends Fixture
 
 
             //Ajout des images à des annonces
-            for ($j=0; $j < mt_rand(3, 4) ; $j++) {
+            for ($j=0; $j < mt_rand(1, 5) ; $j++) {
                 $pictures = new Picture();
 
-                $pictures->setFilename($faker->imageUrl())
+                $pictures->setFilename('https://picsum.photos/id/'.$faker->numberBetween(1000, 1100).'/200/300')
                         ->setAnnonces($annonces);
 
                 $manager->persist($pictures);
